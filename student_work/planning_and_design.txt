@@ -6,12 +6,26 @@ Part I: Planning & Design (15 pts)
 * Sketch a simple plan showing how the game will work step-by-step
 
 Game Idea:
-
+Doodle jump but with better items
 
 Game Rules:
-
+You jump on platforms and if you fall of you die.
+Pick up items as you go to progress faster or die.
+Goal is to get the highest score possible without dying
 
 Major Game Elements:
+Platorms, movement, Jumping, items, Main menu/Gameplay, pause menu, score counter
+[items
+-bounce pads
+-propeller suit
+-jump potion
+-crumble platforms] (if we complete original idea)
 
+the game constantly scrolls up unless jumping off platorm which makes it scroll down.
+If you drop below the 'line' then you lose and it presents a death screen showing your score and a restart button
+if you stay on a platform for to long a 'lava line' will apeare and if you touch it you lose
 
+The platforms will be created at random x values and random y values (within reason)
+once they get to the bottom of the line they will move back to the top randomizing the x position. there will only be about 5 platforms that go down then back up.
 Gameplay Process:
+press 'space' to start the game then 'up arrow' makes you jump. 'left and right arrow' lets you move left and right.
