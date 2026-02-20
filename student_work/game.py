@@ -1,5 +1,5 @@
 # Write your game here
-def start_menu()
+def start_menu():
     print("               ")
     
     print("    WELCOME    ")

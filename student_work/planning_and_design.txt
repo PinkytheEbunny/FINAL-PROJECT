@@ -21,7 +21,9 @@ Platorms, movement, Jumping, items, Main menu/Gameplay, pause menu, score counte
 -jump potion
 -crumble platforms] (if we complete original idea)
 
-the game constantly scrolls up unless jumping off platorm which makes it scroll down.
+the game grid size:10 x 15
+sprite for character U+1F680e
+constantly scrolls up unless jumping off platorm which makes it scroll down.
 If you drop below the 'line' then you lose and it presents a death screen showing your score and a restart button
 if you stay on a platform for to long a 'lava line' will apeare and if you touch it you lose
 as your score gets higher lava rises faster and jump a little higher just to make the game faster pased as you go on
