@@ -30,3 +30,4 @@ The platforms will be created at random x values and random y values (within rea
 once they get to the bottom of the line they will move back to the top randomizing the x position. there will only be about 5 platforms that go down then back up.
 Gameplay Process:
 press 'space' to start the game then 'up arrow' makes you jump. 'left and right arrow' lets you move left and right.
+
