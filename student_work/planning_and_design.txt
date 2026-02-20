@@ -24,6 +24,7 @@ Platorms, movement, Jumping, items, Main menu/Gameplay, pause menu, score counte
 the game constantly scrolls up unless jumping off platorm which makes it scroll down.
 If you drop below the 'line' then you lose and it presents a death screen showing your score and a restart button
 if you stay on a platform for to long a 'lava line' will apeare and if you touch it you lose
+as your score gets higher lava rises faster and jump a little higher just to make the game faster pased as you go on
 
 The platforms will be created at random x values and random y values (within reason)
 once they get to the bottom of the line they will move back to the top randomizing the x position. there will only be about 5 platforms that go down then back up.
