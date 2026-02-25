@@ -6,8 +6,8 @@
 # To make this work, you may have to type this into the terminal --> pip install curses
 import curses
 import random
-collectable_x = random.randint(1,10)
-collectable_y = random.randint(1,10)
+collectable_x = random.randint(1,9)
+collectable_y = random.randint(7,10)
 game_data = {
     'width': 10,
     'height': 15,
@@ -26,12 +26,15 @@ game_data = {
         {"x": 5, "y": 14},
         {"x": 6, "y": 14},
         {"x": 7, "y": 14},
+        {"x": 8, "y": 14},
+        {"x": 9, "y": 14},
+        {"x": 10, "y": 14},
     ],
 
     # ASCII icons
     'turtle': "\U0001F422",
     # 'eagle_icon': "\U0001F985",
-    'obstacle': "___",
+    'obstacle': "\U0001F533",
     'leaf': "\U0001FA99",
     'empty': "  "
 }
