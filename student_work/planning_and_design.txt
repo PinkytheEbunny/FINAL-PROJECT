@@ -20,7 +20,7 @@ Platorms, movement, Jumping, items, Main menu/Gameplay, pause menu, score counte
 -propeller suit
 -jump potion
 -crumble platforms] (if we complete original idea)
-
+as you jump you get more score
 the game grid size:10 x 15
 sprite for character U+1F680e
 constantly scrolls up unless jumping off platorm which makes it scroll down.
