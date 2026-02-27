@@ -59,6 +59,9 @@ def draw_board(stdscr):
                 row += game_data['empty']
         stdscr.addstr(y, 0, row, curses.color_pair(1))
 
+    stdscr.addstr(game_data['height'] + 1, 0,
+                  f"COINS COLLECTED: {game_data['player']['score']}",
+                  curses.color_pair(1))
     stdscr.refresh()
 
 def move_player(key):
@@ -86,7 +89,10 @@ def move_player(key):
     # Update position and increment score
     game_data['player']['x'] = new_x
     game_data['player']['y'] = new_y
-    game_data['player']['score'] += 1
+    if (game_data['player']['x']) == collectable_x and (game_data['player'])['y'] == collectable_y:
+        (game_data['player']['score']) += 1
+        
+
 
 def main(stdscr):
     curses.curs_set(0)
