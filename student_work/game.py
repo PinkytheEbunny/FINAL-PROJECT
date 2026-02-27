@@ -12,7 +12,6 @@ game_data = {
     'width': 10,
     'height': 15,
     'player': {"x": 5, "y": 13, "score": 0, "energy": 10, "max_energy": 10},
-    # 'eagle_pos': {"x": 9, "y": 14},
     'collectibles': [
         {"x": collectable_x, "y": collectable_y, "collected": False},
     ],
@@ -33,7 +32,6 @@ game_data = {
 
     # ASCII icons
     'turtle': "\U0001F419",
-    # 'eagle_icon': "\U0001F985",
     'obstacle': "\U0001F533",
     'leaf': "\U0001FA99",
     'empty': "  "
@@ -51,9 +49,6 @@ def draw_board(stdscr):
             # Player
             if x == game_data['player']['x'] and y == game_data['player']['y']:
                 row += game_data['turtle']
-            # Eagle
-            # elif x == game_data['eagle_pos']['x'] and y == game_data['eagle_pos']['y']:
-            #     row += game_data['eagle_icon']
             # Obstacles
             elif any(o['x'] == x and o['y'] == y for o in game_data['obstacles']):
                 row += game_data['obstacle']
@@ -65,6 +60,51 @@ def draw_board(stdscr):
         stdscr.addstr(y, 0, row, curses.color_pair(1))
 
     stdscr.refresh()
-    stdscr.getkey()  # pause so player can see board
 
-curses.wrapper(draw_board)
+def move_player(key):
+    x = game_data['player']['x']
+    y = game_data['player']['y']
+
+    new_x, new_y = x, y
+    key = key.lower()
+
+    if key == "w" and y > 0:
+        new_y -= 1
+    elif key == "s" and y < game_data['height'] - 1:
+        new_y += 1
+    elif key == "a" and x > 0:
+        new_x -= 1
+    elif key == "d" and x < game_data['width'] - 1:
+        new_x += 1
+    else:
+        return  # Invalid key or move off board
+
+    # Check for obstacles
+    if any(o['x'] == new_x and o['y'] == new_y for o in game_data['obstacles']):
+        return
+
+    # Update position and increment score
+    game_data['player']['x'] = new_x
+    game_data['player']['y'] = new_y
+    game_data['player']['score'] += 1
+
+def main(stdscr):
+    curses.curs_set(0)
+    stdscr.nodelay(True)
+
+    draw_board(stdscr)
+
+    while True:
+        try:
+            key = stdscr.getkey()
+        except:
+            key = None
+
+        if key:
+            if key.lower() == "q":
+                break
+
+            move_player(key)
+            draw_board(stdscr)
+
+curses.wrapper(main)
