@@ -8,16 +8,21 @@ import curses
 import random
 collectable_x = random.randint(1,9)
 collectable_y = random.randint(7,10)
+
+collectable_xx = random.randint(1,9)
+collectable_yy = random.randint(2,5)
 game_data = {
     'width': 10,
     'height': 15,
     'player': {"x": 5, "y": 13, "score": 0, "energy": 10, "max_energy": 10},
     'collectibles': [
         {"x": collectable_x, "y": collectable_y, "collected": False},
+        {"x": collectable_xx, "y": collectable_yy, "collected": False},
     ],
     'obstacles': [
 
         {"x": collectable_x, "y": collectable_y+1},
+        {"x": collectable_xx, "y": collectable_yy+1},
         {"x": 1, "y": 14},
         {"x": 2, "y": 14},
         {"x": 3, "y": 14},
