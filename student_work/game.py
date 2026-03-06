@@ -4,45 +4,65 @@
 # - Pick a size for your playing space
 # - Print your playing space with starting position of each icon
 # To make this work, you may have to type this into the terminal --> pip install curses
+
+
+
+
 import curses
 import random
-collectable_x = random.randint(1,9)
-collectable_y = random.randint(8,10)
+# collectable_x = random.randint(1,9)
+# collectable_y = random.randint(8,10)
 
-collectable_xx = random.randint(1,9)
-collectable_yy = random.randint(5,6)
+# collectable_xx = random.randint(1,9)
+# collectable_yy = random.randint(5,6)
 
-collectable_xxx = 5
-collectable_yyy = 13
-cieling = 2
+
+# random_integer = random.randint(1,9)
+# random_integer = int(random_integer)
+
+
+cieling = 3
 game_data = {
     'width': 10,
     'height': 15,
     'player': {"x": 5, "y": 13, "score": 0, "energy": 10, "max_energy": 10},
     'floor': [
-        {"x": 1, "y": 14, 'state': 'solid'},
-        {"x": 2, "y": 14, 'state': 'solid'},
-        {"x": 3, "y": 14, 'state': 'solid'},
-        {"x": 4, "y": 14, 'state': 'solid'},
-        {"x": 5, "y": 14, 'state': 'solid'},
-        {"x": 6, "y": 14, 'state': 'solid'},
-        {"x": 7, "y": 14, 'state': 'solid'},
-        {"x": 8, "y": 14, 'state': 'solid'},
-        {"x": 9, "y": 14, 'state': 'solid'},
-        {"x": 10, "y": 14, 'state': 'solid'}
+        {"x": 1, "y": 14},
+        {"x": 2, "y": 14},
+        {"x": 3, "y": 14},
+        {"x": 4, "y": 14},
+        {"x": 5, "y": 14},
+        {"x": 6, "y": 14},
+        {"x": 7, "y": 14},
+        {"x": 8, "y": 14},
+        {"x": 9, "y": 14},
+        {"x": 10, "y": 14},
     ],
+    # 'clouds': [
+    #     {"x": 1, "y": 1},
+    #     {"x": 2, "y": 1},
+    #     {"x": 3, "y": 1},
+    #     {"x": 4, "y": 1},
+    #     {"x": 5, "y": 1},
+    #     {"x": 6, "y": 1},
+    #     {"x": 7, "y": 1},
+    #     {"x": 8, "y": 1},
+    #     {"x": 9, "y": 1},
+    #     {"x": 10, "y": 1},
+    # ],
     'collectibles': [
-        {"x": collectable_x, "y": collectable_y, "collected": False},
-        {"x": collectable_xx, "y": collectable_yy, "collected": False},
-        {"x": collectable_xxx, "y": collectable_yyy, "collected": False},
+        {"x": 4, "y": 10, "collected": False},
+        {"x": 5, "y": 6, "collected": False},
+        {"x": 5, "y": 13, "collected": False},
     ],
     'obstacles': [
 
-        {"x": collectable_x, "y": collectable_y+1},
-        {"x": collectable_xx, "y": collectable_yy+1},
+        {"x": 4, "y": 11},
+        {"x": 5, "y": 7},
     ],
 
     # ASCII icons
+    'clouds': "\U0001F327",
     'turtle': "\U0001F419",
     'state': "\U0001F533",
     'solid': "\U0001F533",
@@ -57,7 +77,9 @@ def draw_board(stdscr):
     curses.use_default_colors()
     curses.init_pair(1, curses.COLOR_WHITE, -1)
 
-    stdscr.clear()
+
+    stdscr.clear()    
+
     for y in range(game_data['height']):
         row = ""
         for x in range(game_data['width']):
@@ -77,8 +99,23 @@ def draw_board(stdscr):
     stdscr.addstr(game_data['height'] + 1, 0,
                   f"COINS COLLECTED: {game_data['player']['score']}",
                   curses.color_pair(1))
-    stdscr.refresh()
-
+    for x in range(24):
+    # .addstr(y, x, string)
+        stdscr.addstr(2, x, "\U0001F327")
+def randomization_of_platforms():
+    # (game_data['collectibles']['x']) = random.randint(1,9)
+    # (game_data['collectibles']['y']) = random.randint(1,9)
+    for collectible in game_data['collectibles']:
+        collectible['x'] = random.randint(1,9)
+        collectible['y'] = random.randint(1,9)
+    for obstacle in game_data['obstacles']:
+        obstacle['x'] = random.randint(1,9)
+        obstacle['y'] = random.randint(1,9)
+def reset_level():
+    if (game_data['player']['y']) <= 3:
+        (game_data['player']['y']) = 13
+        (game_data['player']['x']) = 5
+        randomization_of_platforms()
 def move_player(key):
     x = game_data['player']['x']
     y = game_data['player']['y']
@@ -87,8 +124,10 @@ def move_player(key):
     key = key.lower()
 
     if key == "w" and y > 0:
-        if (game_data['player']['x']) == collectable_x and (game_data['player'])['y'] == collectable_y or (game_data['player']['x']) == collectable_xx and (game_data['player'])['y'] == collectable_yy or (game_data['player']['x']) == collectable_xxx and (game_data['player'])['y'] == collectable_yyy:
-            new_y -= 6
+        if (game_data['player']['x']) == 4 and (game_data['player'])['y'] == 10 or (game_data['player']['x']) == 5 and (game_data['player'])['y'] == 6 or (game_data['player']['x']) == 5 and (game_data['player'])['y'] == 13:
+            new_y -= 5
+        if (game_data['player'])['y'] <= 3:
+            reset_level()
     elif key == "s" and y < game_data['height'] - 1:
         new_y += 1
     elif key == "a" and x > 0:
@@ -103,20 +142,17 @@ def move_player(key):
     # Check for obstacles
     if any(o['x'] == new_x and o['y'] == new_y for o in game_data['obstacles']):
         return
+    
+
+
 
     # Update position and increment score
     game_data['player']['x'] = new_x
     game_data['player']['y'] = new_y
-    if (game_data['player']['x']) == collectable_x and (game_data['player'])['y'] == collectable_y:
+    if (game_data['player']['x']) == 4 and (game_data['player'])['y'] == 10:
         (game_data['player']['score']) += 1
-    if (game_data['player']['x']) == collectable_xx and (game_data['player'])['y'] == collectable_yy:
+    if (game_data['player']['x']) == 5 and (game_data['player'])['y'] == 6:
         (game_data['player']['score']) += 1
-    if (game_data['player']['y']) <= cieling:
-        (game_data['player']['y']) = 13
-        (game_data['obstacles']['x']) = random.randint(1,9)
-        (game_data['obstacles']['y']) = random.randint(1,9)
-
-
 
 def main(stdscr):
     curses.curs_set(0)
@@ -136,5 +172,6 @@ def main(stdscr):
 
             move_player(key)
             draw_board(stdscr)
+    
 
 curses.wrapper(main)
