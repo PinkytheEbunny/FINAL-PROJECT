@@ -72,6 +72,7 @@ game_data = {
     'empty': "  "
 }
 
+
 def draw_board(stdscr):
     curses.start_color()
     curses.use_default_colors()
@@ -108,9 +109,10 @@ def randomization_of_platforms():
     for collectible in game_data['collectibles']:
         collectible['x'] = random.randint(1,9)
         collectible['y'] = random.randint(1,9)
-    for obstacle in game_data['obstacles']:
-        obstacle['x'] = random.randint(1,9)
-        obstacle['y'] = random.randint(1,9)
+    for obstacles in game_data['obstacles']:
+        obstacles['x'] = collectible['x']
+        obstacles['y'] = collectible['y']+1
+        
 def reset_level():
     if (game_data['player']['y']) <= 3:
         (game_data['player']['y']) = 13
@@ -126,8 +128,12 @@ def move_player(key):
     if key == "w" and y > 0:
         if (game_data['player']['x']) == 4 and (game_data['player'])['y'] == 10 or (game_data['player']['x']) == 5 and (game_data['player'])['y'] == 6 or (game_data['player']['x']) == 5 and (game_data['player'])['y'] == 13:
             new_y -= 5
-        if (game_data['player'])['y'] <= 3:
-            reset_level()
+
+            
+
+            
+            
+
     elif key == "s" and y < game_data['height'] - 1:
         new_y += 1
     elif key == "a" and x > 0:
@@ -155,12 +161,15 @@ def move_player(key):
         (game_data['player']['score']) += 1
 
 def main(stdscr):
+    
     curses.curs_set(0)
     stdscr.nodelay(True)
 
     draw_board(stdscr)
 
+
     while True:
+
         try:
             key = stdscr.getkey()
         except:
@@ -169,9 +178,27 @@ def main(stdscr):
         if key:
             if key.lower() == "q":
                 break
+            
 
             move_player(key)
             draw_board(stdscr)
-    
+        if (game_data['player'])['y'] <= 2:
+            break
+       
 
 curses.wrapper(main)
+print("YOU WIN BUAHAHA")
+print("   ⡶⢶⡴⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+print("⠀⠀⠀⣧⠀⠁⣼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⣀⣀⠀⠀⠀")
+print("⠀⢠⠟⠉⣠⣄⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣯⠙⠁⣸⠇⠀⠀")
+print("⢠⡎⢀⡼⠋⠈⢋⣁⣀⣀⠀⠀⠀⠀⣀⠤⠶⠶⠶⢤⡀⢸⣇⡴⢦⡈⠙⢦⠀")
+print("⣾⠁⣾⣁⣴⡾⢛⣉⠭⠭⢽⣲⣶⣋⣁⣠⣴⣶⡶⠶⠟⠶⠶⢦⡀⠙⣦⠘⣆")
+print("⡏⠀⣿⣿⡿⠗⠉⠁⠀⣀⡠⢬⣍⣉⣛⡻⠟⢉⡤⢖⡤⣭⣍⠐⠻⣆⢸⠀⢸")
+print("⡇⠀⣿⣿⠁⠀⢀⡴⢋⡕⢫⢚⡿⢶⡄⠈⡿⠉⠁⣼⡟⣧⣽⣇⢀⡞⣾⠀⢸")
+print("⡇⠀⣿⣿⠀⠋⠱⣞⡁⠀⢹⣯⣻⣾⣿⠴⠓⠤⠤⠼⠛⠛⠉⣭⢯⡀⡟⠀⢸")
+print("⡇⠀⢸⣿⠀⡠⠶⠶⠾⠿⠾⢭⣉⣁⣤⣤⣤⡤⠤⠴⠶⠒⣉⣀⡼⢱⠇⠀⢸")
+print("⡇⠀⠸⣿⠘⠧⣀⣘⡒⠲⠶⠦⠤⠤⠤⠤⠴⠶⠶⠖⠒⢋⣉⣴⣣⠞⠀⢀⡞")
+print("⢷⠀⠀⢿⣆⡀⠀⠉⠉⠉⠑⠲⠶⠶⠶⠶⠒⠒⠛⠋⠉⢉⣉⣼⡀⢀⡴⠟⠀")
+print("⠘⣧⠀⠈⠻⣿⣷⣦⣤⣄⣀⣀⣠⣤⣤⣤⣤⣤⣤⣶⣿⣿⣿⣿⣟⠁⠀⠀⠀")
+print("⠀⢸⣷⣄⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀")
+print("⠀⠚⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠋⠀⠀")
