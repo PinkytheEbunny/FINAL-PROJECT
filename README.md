@@ -2,6 +2,10 @@
 
 Due date: 3/6
 
+Group members
+-Dawson
+-Jacob
+
 When you finish, add your video link here and submit one link to your project repository.
 * [Playtesting Video (1 per group)](http://includeyourlinkhere)
 
